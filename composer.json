@@ -1,0 +1,28 @@
+{
+  "name": "baxriev/yii2-vote",
+  "description": "Vote for yii2",
+  "type": "yii2-extension",
+  "keywords": [
+    "yii2",
+    "extension",
+    "vote"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "baxriev",
+      "email": "baxriev.a.a@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "~2.0.0"
+  },
+  "extra": {
+    "bootstrap": "baxriev\\vote\\Bootstrap"
+  },
+  "autoload": {
+    "psr-4": {
+      "baxriev\\vote\\": "src"
+    }
+  }
+}
