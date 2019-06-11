@@ -11,7 +11,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Vote Questions', 'url' => ['index'
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<?php  echo LangsWidgets::widget(['model_db' => $question,'create_url' => '/vote-questions/create']); ?>
 <div class="vote-questions-update">
 
     <?= $this->render('_form', [

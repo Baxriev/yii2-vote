@@ -45,6 +45,7 @@ $this->registerJs($script);
     a {
         text-decoration: none;
     }
+
     .btn {
         -moz-border-bottom-colors: none;
         -moz-border-left-colors: none;
@@ -65,6 +66,7 @@ $this->registerJs($script);
         text-align: center;
         vertical-align: middle;
     }
+
     .btn-info {
         background-color: #49AFCD;
         background-image: linear-gradient(to bottom, #5BC0DE, #2F96B4);
@@ -73,76 +75,110 @@ $this->registerJs($script);
         color: #FFFFFF;
         text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
     }
-    .btn:hover{
-        color:#333;
-        text-decoration:none;
-        background-position:0 -15px;
-        -webkit-transition:background-position .1s linear;
-        -moz-transition:background-position .1s linear;
-        -o-transition:background-position .1s linear;
-        transition:background-position .1s linear;
+
+    .btn:hover {
+        color: #333;
+        text-decoration: none;
+        background-position: 0 -15px;
+        -webkit-transition: background-position .1s linear;
+        -moz-transition: background-position .1s linear;
+        -o-transition: background-position .1s linear;
+        transition: background-position .1s linear;
     }
-    .btn-info:hover{
-        color:#fff;
-        background-color:#2f96b4;
+
+    .btn-info:hover {
+        color: #fff;
+        background-color: #2f96b4;
     }
+
     #contenedor {
         margin-top: 15px;
     }
+
     .eliminar {
         margin: 5px;
     }
+
     .title-generate {
         width: 90%;
         float: left;
         margin-bottom: 2px;
     }
+
     .eliminar {
         font-size: 25px;
     }
 </style>
-<div class="vote-answers-form col-lg-12">
-    <?php $form = ActiveForm::begin(); ?>
-    <div class="panel form-horizontal col-md-6">
-        <div class="panel-body">
-            <?=$form->field($question, 'title')->textInput()?>
+<div class="content">
 
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <?php
-                    if (is_null($question->status)) {
-                        $question->status = true;
-                    }
-                    // Usage with ActiveForm and model
-                    echo $form->field($question, 'status')->checkbox(['data-init-plugin' => 'switchery']);
-                    ?>
-                </div>
-                <?
-                echo $form->field($question, 'top')->checkbox(['data-init-plugin' => 'switchery']);
-                ?>
-            </div>
-            <div class="form-group col-lg-12">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-            </div>
+    <div class="container-fluid   container-fixed-lg">
+        <div class="row">
+            <h3 class="col-lg-12"><?= $this->title ?></h3>
         </div>
-    </div>
-    <div class="panel form-horizontal col-md-6">
-        <div class="panel-body">
-            <div id="contenedor">
-                <?php if (!empty($model[0])) : ?>
-                    <?php $i = 1; foreach ($model as $item) : ?>
-                        <div class="added">
-                            <input class="title-generate form-control" type="text" value="<?=$item['title']?>" name="VoteAnswers[title][<?=$i++;?>]" id="input_<?=$i;?>"/><a href="#" class="eliminar">&times;</a>
+        <?php echo LangsWidgets::widget(['model_db' => $model, 'create_url' => '/banner/create']); ?>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <?php $form = ActiveForm::begin([
+                            'fieldConfig' => [
+                                'options' => [
+                                    'tag' => false,
+                                ],
+                            ],
+                        ]); ?>
+                        <div class="panel form-horizontal col-md-6">
+                            <div class="panel-body">
+                                <?= $form->field($question, 'title')->textInput() ?>
+
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <?php
+                                        if (is_null($question->status)) {
+                                            $question->status = true;
+                                        }
+                                        // Usage with ActiveForm and model
+                                        echo $form->field($question, 'status')->checkbox(['data-init-plugin' => 'switchery']);
+                                        ?>
+                                    </div>
+                                    <?
+                                    echo $form->field($question, 'top')->checkbox(['data-init-plugin' => 'switchery']);
+                                    ?>
+                                </div>
+                                <div class="form-group">
+                                    <?= Html::submitButton(Yii::t('backend', 'Сохранить'), ['class' => 'btn btn-lg btn-rounded btn-primary m-r-20 m-b-10']) ?>
+                                </div>
+                            </div>
                         </div>
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <div class="added">
-                        <input class="title-generate form-control" type="text" name="VoteAnswers[title][]" id="input_1" placeholder="<?=__('Ответ')?> 1"/><a href="#" class="eliminar">&times;</a>
+                        <div class="panel form-horizontal col-md-6">
+                            <div class="panel-body">
+                                <div id="contenedor">
+                                    <?php if (!empty($model[0])) : ?>
+                                        <?php $i = 1;
+                                        foreach ($model as $item) : ?>
+                                            <div class="added">
+                                                <input class="title-generate form-control" type="text"
+                                                       value="<?= $item['title'] ?>"
+                                                       name="VoteAnswers[title][<?= $i++; ?>]" id="input_<?= $i; ?>"/><a
+                                                        href="#" class="eliminar">&times;</a>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php else : ?>
+                                        <div class="added">
+                                            <input class="title-generate form-control" type="text"
+                                                   name="VoteAnswers[title][]" id="input_1"
+                                                   placeholder="<?= __('Ответ') ?> 1"/><a href="#" class="eliminar">&times;</a>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <a id="agregarCampo" class="btn btn-info" href="#"><?= __('Добавить') ?></a>
+                            </div>
+                            <?php ActiveForm::end(); ?>
+                        </div>
                     </div>
-                <?php endif; ?>
+                </div>
             </div>
-            <a id="agregarCampo" class="btn btn-info" href="#"><?=__('Добавить')?></a>
         </div>
-        <?php ActiveForm::end(); ?>
     </div>
 </div>

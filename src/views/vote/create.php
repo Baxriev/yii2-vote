@@ -11,8 +11,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vote-questions-create">
 
-    <?php echo \oks\langs\widgets\LangsWidgets::widget(); ?>
-
     <?= $this->render('_form', [
         'model' => $model,
         'question' => $question
