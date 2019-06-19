@@ -6,6 +6,7 @@ use baxriev\vote\models\VoteAnswers;
 use Yii;
 use baxriev\vote\models\VoteQuestions;
 use baxriev\vote\models\VoteQuestionsSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,6 +22,21 @@ class VoteController extends Controller
     public function behaviors()
     {
         return [
+//            'access' => [
+//                'class' => AccessControl::className(), 
+//                'rules' => [
+//                    [
+//                        'actions' => ['signup'],
+//                        'allow' => true,
+//                        'roles' => ['?'],
+//                    ],
+//                    [
+//                        'actions' => ['logout'],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -29,7 +45,7 @@ class VoteController extends Controller
             ],
         ];
     }
-
+    
     /**
      * Lists all VoteQuestions models.
      * @return mixed
@@ -43,19 +59,6 @@ class VoteController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single VoteQuestions model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
         ]);
     }
 
@@ -151,4 +154,5 @@ class VoteController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

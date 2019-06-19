@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use oks\langs\widgets\LangsWidgets;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\VoteQuestions */
@@ -115,7 +116,7 @@ $this->registerJs($script);
         <div class="row">
             <h3 class="col-lg-12"><?= $this->title ?></h3>
         </div>
-        <?php echo LangsWidgets::widget(['model_db' => $model, 'create_url' => '/banner/create']); ?>
+        <?php echo LangsWidgets::widget(['model_db' => $question, 'create_url' => '/vote/vote/create']); ?>
 
         <div class="row">
             <div class="col-lg-12">
