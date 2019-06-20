@@ -45,7 +45,7 @@ class VoteController extends Controller
             ],
         ];
     }
-    
+
     /**
      * Lists all VoteQuestions models.
      * @return mixed
@@ -108,13 +108,8 @@ class VoteController extends Controller
             $answers = Yii::$app->request->post("VoteAnswers");
             $question->save();
             foreach ($model as $key){
-                $key->delete();
-            }
-            foreach ($answers['title'] as $title) {
-                $model = new VoteAnswers();
-                $model->questions_id = $question->id;
-                $model->title = $title;
-                $model->save();
+                $key->title = $answers['title'][$key->id];
+                $key->save();
             }
             return $this->redirect(['update', 'id' => $question->id]);
         }

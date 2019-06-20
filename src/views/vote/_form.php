@@ -161,7 +161,7 @@ $this->registerJs($script);
                                             <div class="added">
                                                 <input class="title-generate form-control" type="text"
                                                        value="<?= $item['title'] ?>"
-                                                       name="VoteAnswers[title][<?= $i++; ?>]" id="input_<?= $i; ?>"/><a
+                                                       name="VoteAnswers[title][<?= $item['id'] ?>]" id="input_<?= $item['id']; ?>"/><a
                                                         href="#" class="eliminar">&times;</a>
                                             </div>
                                         <?php endforeach; ?>
